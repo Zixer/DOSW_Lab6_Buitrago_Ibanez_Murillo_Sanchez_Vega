@@ -1,4 +1,8 @@
 # DOSW_Lab6_Buitrago_Ibanez_Murillo_Sanchez_Vega
+## Diagrama de Clases UML - Primer Ciclo
+
+![Diagrama de Clases](docs/diagrama-clases.png)
+=======
 
 # PARTE 2 - Preguntas sobre la estructura de Spring Boot
  
@@ -19,3 +23,4 @@ Spring. *Accessing data with JPA*. Spring Guides. https://spring.io/guides/gs/ac
 Spring.  *Spring Data JPA – Reference documentation*. https://docs.spring.io/spring-data/jpa/reference/index.html
  
 Spring.  *Spring Framework overview*. Spring Framework Reference Documentation. https://docs.spring.io/spring-framework/reference/overview.html
+>>>>>>> 342d8c664aa8bc898d7b6833376143e708e8bb83
