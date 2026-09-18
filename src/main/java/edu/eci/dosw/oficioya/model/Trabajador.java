@@ -1,47 +1,49 @@
 package edu.eci.dosw.oficioya.model;
 
-public class Trabajador {
+import java.util.ArrayList;
+import java.util.List;
 
-    private Long id;
-    private String nombre;
-    private String correo;
-    private String telefono;
+public class Trabajador extends Usuario {
+    private String fotoUrl;
     private String oficioPrincipal;
-    private String contrasena;
-    private EstadoTrabajador estado;
+    private List<String> oficiosSecundarios = new ArrayList<>();
+    private List<String> zonaCobertura = new ArrayList<>();
+    private Double tarifaAproximada;
+    private String disponibilidadSemanal;
+    private Boolean disponibleAhora = false;
+    private Integer trabajosCompletados = 0;
+    private Double calificacionPromedio = 0.0;
+    private EstadoTrabajador estado = EstadoTrabajador.ACTIVO;
 
     public Trabajador() {
-        this.estado = EstadoTrabajador.ACTIVO;
+        super();
+        getRoles().add(RolUsuario.TRABAJADOR);
     }
 
     public Trabajador(Long id, String nombre, String correo, String telefono, String oficioPrincipal, String contrasena) {
-        this.id = id;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.telefono = telefono;
+        super(id, nombre, correo, telefono, contrasena);
         this.oficioPrincipal = oficioPrincipal;
-        this.contrasena = contrasena;
-        this.estado = EstadoTrabajador.ACTIVO;
+        getRoles().add(RolUsuario.TRABAJADOR);
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-
-    public String getCorreo() { return correo; }
-    public void setCorreo(String correo) { this.correo = correo; }
-
-    public String getTelefono() { return telefono; }
-    public void setTelefono(String telefono) { this.telefono = telefono; }
-
+    public String getFotoUrl() { return fotoUrl; }
+    public void setFotoUrl(String fotoUrl) { this.fotoUrl = fotoUrl; }
     public String getOficioPrincipal() { return oficioPrincipal; }
     public void setOficioPrincipal(String oficioPrincipal) { this.oficioPrincipal = oficioPrincipal; }
-
-    public String getContrasena() { return contrasena; }
-    public void setContrasena(String contrasena) { this.contrasena = contrasena; }
-
+    public List<String> getOficiosSecundarios() { return oficiosSecundarios; }
+    public void setOficiosSecundarios(List<String> oficiosSecundarios) { this.oficiosSecundarios = oficiosSecundarios; }
+    public List<String> getZonaCobertura() { return zonaCobertura; }
+    public void setZonaCobertura(List<String> zonaCobertura) { this.zonaCobertura = zonaCobertura; }
+    public Double getTarifaAproximada() { return tarifaAproximada; }
+    public void setTarifaAproximada(Double tarifaAproximada) { this.tarifaAproximada = tarifaAproximada; }
+    public String getDisponibilidadSemanal() { return disponibilidadSemanal; }
+    public void setDisponibilidadSemanal(String disponibilidadSemanal) { this.disponibilidadSemanal = disponibilidadSemanal; }
+    public Boolean getDisponibleAhora() { return disponibleAhora; }
+    public void setDisponibleAhora(Boolean disponibleAhora) { this.disponibleAhora = disponibleAhora; }
+    public Integer getTrabajosCompletados() { return trabajosCompletados; }
+    public void setTrabajosCompletados(Integer trabajosCompletados) { this.trabajosCompletados = trabajosCompletados; }
+    public Double getCalificacionPromedio() { return calificacionPromedio; }
+    public void setCalificacionPromedio(Double calificacionPromedio) { this.calificacionPromedio = calificacionPromedio; }
     public EstadoTrabajador getEstado() { return estado; }
     public void setEstado(EstadoTrabajador estado) { this.estado = estado; }
 }
