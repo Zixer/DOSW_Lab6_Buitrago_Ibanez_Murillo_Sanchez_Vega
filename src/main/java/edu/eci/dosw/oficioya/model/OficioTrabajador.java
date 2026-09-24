@@ -1,3 +1,5 @@
+package edu.eci.dosw.oficioya.model;
+
 public class OficioTrabajador {
     private Long id;
     private Boolean esPrincipal;

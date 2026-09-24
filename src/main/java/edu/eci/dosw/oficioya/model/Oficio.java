@@ -1,3 +1,5 @@
+package edu.eci.dosw.oficioya.model;
+
 public class Oficio {
     private Long id;
     private String nombre;
