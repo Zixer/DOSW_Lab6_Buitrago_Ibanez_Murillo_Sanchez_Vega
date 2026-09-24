@@ -1,7 +1,7 @@
 # DOSW_Lab6_Buitrago_Ibanez_Murillo_Sanchez_Vega
 ## Diagrama de Clases UML - Primer Ciclo
 
-![Diagrama de Clases](../uml/OficioYaLab6.png)
+![Diagrama de Clases](../docs/uml/OficioYaLab6.png)
 
 # PARTE 2 - Preguntas sobre la estructura de Spring Boot
  
