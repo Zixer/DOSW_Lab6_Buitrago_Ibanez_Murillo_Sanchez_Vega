@@ -1,49 +1,170 @@
 package edu.eci.dosw.oficioya.model;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
 
-public class Trabajador extends Usuario {
-    private String fotoUrl;
-    private String oficioPrincipal;
-    private List<String> oficiosSecundarios = new ArrayList<>();
-    private List<String> zonaCobertura = new ArrayList<>();
+public class Trabajador {
+
+    private Long id;
+    private String nombreCompleto;
+    private String fotoPerfilUrl;
     private Double tarifaAproximada;
-    private String disponibilidadSemanal;
-    private Boolean disponibleAhora = false;
-    private Integer trabajosCompletados = 0;
-    private Double calificacionPromedio = 0.0;
-    private EstadoTrabajador estado = EstadoTrabajador.ACTIVO;
+    private Boolean disponibleAhora;
+    private Integer trabajosCompletados;
+    private Double calificacionPromedio;
+    private Double penalizacionAcumulada;
+    private LocalDateTime fechaCreacion;
+    private LocalDateTime fechaActualizacion;
+    private Boolean eliminadoLogico;
+    private Usuario usuario;
+    private List<DisponibilidadSemanal> horarios = new ArrayList<>();
+    private List<OficioTrabajador> oficios = new ArrayList<>();
+
 
     public Trabajador() {
-        super();
-        getRoles().add(RolUsuario.TRABAJADOR);
     }
 
-    public Trabajador(Long id, String nombre, String correo, String telefono, String oficioPrincipal, String contrasena) {
-        super(id, nombre, correo, telefono, contrasena);
-        this.oficioPrincipal = oficioPrincipal;
-        getRoles().add(RolUsuario.TRABAJADOR);
+
+    public Trabajador(Long id, String nombreCompleto, String fotoPerfilUrl,Double tarifaAproximada, Boolean disponibleAhora,Integer trabajosCompletados, Double calificacionPromedio,
+                      Double penalizacionAcumulada, LocalDateTime fechaCreacion,LocalDateTime fechaActualizacion, Boolean eliminadoLogico,Usuario usuario) {
+        this.id = id;
+        this.nombreCompleto = nombreCompleto;
+        this.fotoPerfilUrl = fotoPerfilUrl;
+        this.tarifaAproximada = tarifaAproximada;
+        this.disponibleAhora = disponibleAhora;
+        this.trabajosCompletados = trabajosCompletados;
+        this.calificacionPromedio = calificacionPromedio;
+        this.penalizacionAcumulada = penalizacionAcumulada;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaActualizacion = fechaActualizacion;
+        this.eliminadoLogico = eliminadoLogico;
+        this.usuario = usuario;
     }
 
-    public String getFotoUrl() { return fotoUrl; }
-    public void setFotoUrl(String fotoUrl) { this.fotoUrl = fotoUrl; }
-    public String getOficioPrincipal() { return oficioPrincipal; }
-    public void setOficioPrincipal(String oficioPrincipal) { this.oficioPrincipal = oficioPrincipal; }
-    public List<String> getOficiosSecundarios() { return oficiosSecundarios; }
-    public void setOficiosSecundarios(List<String> oficiosSecundarios) { this.oficiosSecundarios = oficiosSecundarios; }
-    public List<String> getZonaCobertura() { return zonaCobertura; }
-    public void setZonaCobertura(List<String> zonaCobertura) { this.zonaCobertura = zonaCobertura; }
-    public Double getTarifaAproximada() { return tarifaAproximada; }
-    public void setTarifaAproximada(Double tarifaAproximada) { this.tarifaAproximada = tarifaAproximada; }
-    public String getDisponibilidadSemanal() { return disponibilidadSemanal; }
-    public void setDisponibilidadSemanal(String disponibilidadSemanal) { this.disponibilidadSemanal = disponibilidadSemanal; }
-    public Boolean getDisponibleAhora() { return disponibleAhora; }
-    public void setDisponibleAhora(Boolean disponibleAhora) { this.disponibleAhora = disponibleAhora; }
-    public Integer getTrabajosCompletados() { return trabajosCompletados; }
-    public void setTrabajosCompletados(Integer trabajosCompletados) { this.trabajosCompletados = trabajosCompletados; }
-    public Double getCalificacionPromedio() { return calificacionPromedio; }
-    public void setCalificacionPromedio(Double calificacionPromedio) { this.calificacionPromedio = calificacionPromedio; }
-    public EstadoTrabajador getEstado() { return estado; }
-    public void setEstado(EstadoTrabajador estado) { this.estado = estado; }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+
+
+    public String getFotoPerfilUrl() {
+        return fotoPerfilUrl;
+    }
+
+    public void setFotoPerfilUrl(String fotoPerfilUrl) {
+        this.fotoPerfilUrl = fotoPerfilUrl;
+    }
+
+
+    public Double getTarifaAproximada() {
+        return tarifaAproximada;
+    }
+
+    public void setTarifaAproximada(Double tarifaAproximada) {
+        this.tarifaAproximada = tarifaAproximada;
+    }
+
+
+    public Boolean getDisponibleAhora() {
+        return disponibleAhora;
+    }
+
+    public void setDisponibleAhora(Boolean disponibleAhora) {
+        this.disponibleAhora = disponibleAhora;
+    }
+
+
+    public Integer getTrabajosCompletados() {
+        return trabajosCompletados;
+    }
+
+    public void setTrabajosCompletados(Integer trabajosCompletados) {
+        this.trabajosCompletados = trabajosCompletados;
+    }
+
+
+    public Double getCalificacionPromedio() {
+        return calificacionPromedio;
+    }
+
+    public void setCalificacionPromedio(Double calificacionPromedio) {
+        this.calificacionPromedio = calificacionPromedio;
+    }
+
+
+    public Double getPenalizacionAcumulada() {
+        return penalizacionAcumulada;
+    }
+
+    public void setPenalizacionAcumulada(Double penalizacionAcumulada) {
+        this.penalizacionAcumulada = penalizacionAcumulada;
+    }
+
+
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+
+    public LocalDateTime getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(LocalDateTime fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
+    }
+
+
+    public Boolean getEliminadoLogico() {
+        return eliminadoLogico;
+    }
+
+    public void setEliminadoLogico(Boolean eliminadoLogico) {
+        this.eliminadoLogico = eliminadoLogico;
+    }
+
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+
+    public List<DisponibilidadSemanal> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<DisponibilidadSemanal> horarios) {
+        this.horarios = horarios;
+    }
+
+
+    public List<OficioTrabajador> getOficios() {
+        return oficios;
+    }
+
+    public void setOficios(List<OficioTrabajador> oficios) {
+        this.oficios = oficios;
+    }
 }

@@ -39,7 +39,7 @@ public class TrabajadorController {
         return ResponseEntity.ok(trabajadorService.actualizar(id, trabajador));
     }
 
-    @DeleteMapping("/{id}")
+    @PatchMapping("/{id}/inactivar")
     public ResponseEntity<Trabajador> inactivar(@PathVariable Long id) {
         return ResponseEntity.ok(trabajadorService.desactivar(id));
     }

@@ -19,13 +19,29 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse autenticar(AuthRequest request) {
-        Optional<Trabajador> encontrado = trabajadorService.buscarPorCorreo(request.getCorreo());
 
-        if (encontrado.isEmpty() || !encontrado.get().getContrasena().equals(request.getContrasena())) {
+        Optional<Trabajador> encontrado =
+                trabajadorService.buscarPorCorreo(request.getCorreo());
+
+        if (encontrado.isEmpty()) {
             throw new CredencialesInvalidasException();
         }
 
         Trabajador trabajador = encontrado.get();
-        return new AuthResponse("Autenticación exitosa", trabajador.getCorreo(), trabajador.getNombre());
+
+        if (trabajador.getUsuario() == null
+                || trabajador.getUsuario().getContrasena() == null
+                || !trabajador.getUsuario()
+                        .getContrasena()
+                        .equals(request.getContrasena())) {
+
+            throw new CredencialesInvalidasException();
+        }
+
+        return new AuthResponse(
+                "Autenticación exitosa",
+                trabajador.getUsuario().getCorreo(),
+                trabajador.getNombreCompleto()
+        );
     }
 }
