@@ -1,3 +1,5 @@
+package edu.eci.dosw.oficioya.model;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
@@ -5,7 +7,8 @@ import java.util.ArrayList;
 public class Usuario {
 
     private Long id;
-    private String email;
+    private String nombre;
+    private String correo;
     private String passwordHash;
     private String telefono;
     private String contrasena;
