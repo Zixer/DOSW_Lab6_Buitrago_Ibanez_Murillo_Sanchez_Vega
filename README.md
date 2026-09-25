@@ -1,8 +1,4 @@
 # DOSW_Lab6_Buitrago_Ibanez_Murillo_Sanchez_Vega
-## Diagrama de Clases UML - Primer Ciclo
-
-![Diagrama de Clases](src/main/resources/docs/uml/OficioYaLab6.png)
-
 
 # PARTE 2 - Preguntas sobre la estructura de Spring Boot
  
@@ -24,7 +20,17 @@ Spring.  *Spring Data JPA – Reference documentation*. https://docs.spring.io/s
  
 Spring.  *Spring Framework overview*. Spring Framework Reference Documentation. https://docs.spring.io/spring-framework/reference/overview.html
 
+## PARTE 2 - Diagrama de Clases UML - Primer Ciclo
+
+![Diagrama de Clases](src/main/resources/docs/uml/OficioYaLab6.png)
+
 ## PARTE 5 - SWAGGER - DOCUMENTAR API
 
 ![Swagger](src/main/resources/docs/images/Swagger.png)
+
+## PARTE 6 - LOGGER
+
+Se guardaron los logs en el directorio resources.
+
+![Logs](src/main/resources/docs/images/logger.png)
 
