@@ -20,7 +20,7 @@ Spring.  *Spring Data JPA – Reference documentation*. https://docs.spring.io/s
  
 Spring.  *Spring Framework overview*. Spring Framework Reference Documentation. https://docs.spring.io/spring-framework/reference/overview.html
 
-## PARTE 2 - Diagrama de Clases UML - Primer Ciclo
+## PARTE 3 - Diagrama de Clases UML - Primer Ciclo
 
 ![Diagrama de Clases](src/main/resources/docs/uml/OficioYaLab6.png)
 
