@@ -24,3 +24,7 @@ Spring.  *Spring Data JPA – Reference documentation*. https://docs.spring.io/s
  
 Spring.  *Spring Framework overview*. Spring Framework Reference Documentation. https://docs.spring.io/spring-framework/reference/overview.html
 
+## PARTE 5 - SWAGGER - DOCUMENTAR API
+
+![Swagger](src/main/resources/docs/images/Swagger.png)
+
