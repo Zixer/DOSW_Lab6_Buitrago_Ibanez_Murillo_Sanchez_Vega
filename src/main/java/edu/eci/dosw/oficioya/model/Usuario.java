@@ -9,7 +9,6 @@ public class Usuario {
     private Long id;
     private String nombre;
     private String correo;
-    private String passwordHash;
     private String telefono;
     private String contrasena;
     private List<RolUsuario> roles = new ArrayList<>();
