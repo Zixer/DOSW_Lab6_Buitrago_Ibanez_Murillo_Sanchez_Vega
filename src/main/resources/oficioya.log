@@ -1,0 +1,6 @@
+2026-09-24T21:46:54.638-05:00  INFO 21692 --- [oficioya] [main] e.e.d.oficioya.OficioyaApplicationTests  : Starting OficioyaApplicationTests using Java 21.0.12.1 with PID 21692 (started by chech in C:\Users\chech\Downloads\DOSW\DOSW_Lab6_Buitrago_Ibanez_Murillo_Sanchez_Vega)
+2026-09-24T21:46:54.647-05:00  INFO 21692 --- [oficioya] [main] e.e.d.oficioya.OficioyaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2026-09-24T21:46:56.965-05:00  INFO 21692 --- [oficioya] [main] e.e.d.o.service.TrabajadorServiceImpl    : Inicializando servicio de trabajadores
+2026-09-24T21:46:58.371-05:00  INFO 21692 --- [oficioya] [main] e.e.d.oficioya.OficioyaApplicationTests  : Started OficioyaApplicationTests in 4.586 seconds (process running for 7.675)
+2026-09-24T21:46:58.371-05:00  WARN 21692 --- [oficioya] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-24T21:46:58.371-05:00  WARN 21692 --- [oficioya] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'

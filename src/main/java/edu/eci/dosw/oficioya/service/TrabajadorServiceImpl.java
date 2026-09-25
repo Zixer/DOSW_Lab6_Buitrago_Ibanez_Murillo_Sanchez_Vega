@@ -3,8 +3,9 @@ package edu.eci.dosw.oficioya.service;
 import edu.eci.dosw.oficioya.exception.CampoObligatorioException;
 import edu.eci.dosw.oficioya.exception.TrabajadorNoEncontradoException;
 import edu.eci.dosw.oficioya.model.Trabajador;
-import edu.eci.dosw.oficioya.model.Usuario;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,52 +19,47 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class TrabajadorServiceImpl implements TrabajadorService {
 
+    private static final Logger log = LoggerFactory.getLogger(TrabajadorServiceImpl.class);
+
     private final Map<Long, Trabajador> trabajadores = new ConcurrentHashMap<>();
 
     private final AtomicLong contadorId = new AtomicLong(1);
 
+
     public TrabajadorServiceImpl() {
 
-        Usuario usuarioDemo = new Usuario();
+        log.info("Inicializando servicio de trabajadores");
 
-        usuarioDemo.setId(1L);
-        usuarioDemo.setNombre("Trabajador Demo");
-        usuarioDemo.setCorreo("demo@ejemplo.com");
-        usuarioDemo.setTelefono("3001234567");
-        usuarioDemo.setContrasena("1234");
-
-        Trabajador trabajadorDemo = new Trabajador();
-
-        trabajadorDemo.setId(1L);
-        trabajadorDemo.setNombreCompleto("Trabajador Demo");
-        trabajadorDemo.setUsuario(usuarioDemo);
-        trabajadorDemo.setDisponibleAhora(true);
-        trabajadorDemo.setTrabajosCompletados(0);
-        trabajadorDemo.setCalificacionPromedio(0.0);
-        trabajadorDemo.setPenalizacionAcumulada(0.0);
-        trabajadorDemo.setEliminadoLogico(false);
-        trabajadorDemo.setFechaCreacion(LocalDateTime.now());
-        trabajadorDemo.setFechaActualizacion(LocalDateTime.now());
-
-        trabajadores.put(1L, trabajadorDemo);
-
-        contadorId.set(2);
     }
+
 
     @Override
     public List<Trabajador> listar() {
-        return new ArrayList<>(trabajadores.values());
+
+        log.debug("Consultando lista de trabajadores");
+
+        List<Trabajador> lista = new ArrayList<>(trabajadores.values());
+
+        log.info("Se encontraron {} trabajadores", lista.size());
+
+        return lista;
     }
 
 
     @Override
     public Trabajador obtenerPorId(Long id) {
 
+        log.debug("Buscando trabajador con id: {}", id);
+
         Trabajador trabajador = trabajadores.get(id);
 
         if (trabajador == null) {
+
+            log.error("No se encontró trabajador con id: {}", id);
             throw new TrabajadorNoEncontradoException(id);
         }
+
+        log.info("Trabajador encontrado con id: {}",id);
 
         return trabajador;
     }
@@ -72,35 +68,37 @@ public class TrabajadorServiceImpl implements TrabajadorService {
     @Override
     public Trabajador crear(Trabajador trabajador) {
 
+        log.debug("Iniciando creación de trabajador");
+
         validarCamposObligatorios(trabajador);
 
-        Long id = contadorId.getAndIncrement();
+        Long id =contadorId.getAndIncrement();
 
         trabajador.setId(id);
         trabajador.setEliminadoLogico(false);
-
         trabajador.setFechaCreacion(LocalDateTime.now());
-
-        trabajador.setFechaActualizacion(
-                LocalDateTime.now()
-        );
+        trabajador.setFechaActualizacion(LocalDateTime.now());
 
         trabajadores.put(id, trabajador);
+
+        log.info("Trabajador creado correctamente con id: {}", id);
 
         return trabajador;
     }
 
 
     @Override
-    public Trabajador actualizar(Long id,Trabajador datosNuevos) {
+    public Trabajador actualizar(Long id, Trabajador datosNuevos) {
 
-        Trabajador existente =obtenerPorId(id);
+        log.debug("Intentando actualizar trabajador con id: {}", id);
+
+        Trabajador existente = obtenerPorId(id);
 
         if (Boolean.TRUE.equals(existente.getEliminadoLogico())) {
-            throw new IllegalStateException(
-                    "No se puede modificar un trabajador inactivo"
-            );
-        }
+
+            log.error("No se puede actualizar el trabajador {} porque está inactivo",id);
+
+            throw new IllegalStateException("No se puede modificar un trabajador inactivo");}
 
         validarCamposObligatorios(datosNuevos);
 
@@ -126,6 +124,8 @@ public class TrabajadorServiceImpl implements TrabajadorService {
 
         existente.setFechaActualizacion(LocalDateTime.now());
 
+        log.info("Trabajador actualizado correctamente con id: {}",id);
+
         return existente;
     }
 
@@ -133,73 +133,98 @@ public class TrabajadorServiceImpl implements TrabajadorService {
     @Override
     public Trabajador desactivar(Long id) {
 
-        Trabajador trabajador =obtenerPorId(id);
+        log.debug("Intentando inactivar trabajador con id: {}",id);
+
+        Trabajador trabajador = obtenerPorId(id);
 
         trabajador.setEliminadoLogico(true);
-
         trabajador.setFechaActualizacion(LocalDateTime.now());
+
+        log.info("Trabajador inactivado correctamente con id: {}", id );
 
         return trabajador;
     }
 
 
     @Override
-    public Optional<Trabajador> buscarPorCorreo(
-            String correo) {
+    public Optional<Trabajador> buscarPorCorreo(String correo) {
 
-        return trabajadores.values().stream().filter(t ->!Boolean.TRUE.equals(t.getEliminadoLogico()))
-                .filter(t ->t.getUsuario() != null)
+        log.debug("Buscando trabajador por correo: {}", correo);
 
-                .filter(t ->t.getUsuario().getCorreo() != null)
+        Optional<Trabajador> resultado = trabajadores.values()
+                        .stream()
 
-                .filter(t ->t.getUsuario().getCorreo().equalsIgnoreCase(correo))
+                        .filter(t ->!Boolean.TRUE.equals(t.getEliminadoLogico()))
 
-                .findFirst();
+                        .filter(t ->t.getUsuario() != null)
+
+                        .filter(t ->t.getUsuario().getCorreo() != null)
+
+                        .filter(t -> t.getUsuario().getCorreo().equalsIgnoreCase(correo))
+
+                        .findFirst();
+
+        if (resultado.isPresent()) {
+
+            log.info("Trabajador encontrado para el correo: {}", correo);} 
+            
+            else {
+
+            log.warn("No se encontró trabajador para el correo: {}", correo);
+        }
+
+        return resultado;
     }
 
 
     private void validarCamposObligatorios(Trabajador trabajador) {
 
-        if (trabajador == null) {
-            throw new CampoObligatorioException(
-                    "trabajador"
-            );
+        log.debug("Validando campos obligatorios del trabajador");
+
+        if (trabajador == null) {log.error("El trabajador recibido es null");
+            throw new CampoObligatorioException("trabajador");
         }
 
         if (isVacio(trabajador.getNombreCompleto())) {
-            throw new CampoObligatorioException(
-                    "nombre"
-            );
+
+            log.error("Campo obligatorio nombre vacío");
+
+            throw new CampoObligatorioException("nombre");
         }
 
         if (trabajador.getUsuario() == null) {
-            throw new CampoObligatorioException(
-                    "usuario"
-            );
+
+            log.error("Campo obligatorio usuario vacío");
+
+            throw new CampoObligatorioException("usuario");
         }
 
         if (isVacio(trabajador.getUsuario().getCorreo())) {
-            throw new CampoObligatorioException(
-                    "correo"
-            );
+
+            log.error("Campo obligatorio correo vacío");
+
+            throw new CampoObligatorioException("correo");
         }
 
         if (isVacio(trabajador.getUsuario().getTelefono())) {
-            throw new CampoObligatorioException(
-                    "telefono"
-            );
+
+            log.error("Campo obligatorio teléfono vacío");
+
+            throw new CampoObligatorioException("telefono");
         }
 
         if (isVacio(trabajador.getUsuario().getContrasena())) {
-            throw new CampoObligatorioException(
-                    "contrasena"
-            );
+
+            log.error("Campo obligatorio contraseña vacío");
+
+            throw new CampoObligatorioException("contrasena");
         }
 
         if (trabajador.getOficios() == null || trabajador.getOficios().isEmpty()) {
-            throw new CampoObligatorioException(
-                    "oficio principal"
-            );
+
+            log.error("Campo obligatorio oficio principal vacío");
+
+            throw new CampoObligatorioException("oficio principal");
         }
     }
 
